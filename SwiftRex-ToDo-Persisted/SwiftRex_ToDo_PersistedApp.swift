@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import CombineRex
+
 
 @main
-struct SwiftRex_ToDo_PersistedApp: App {
+struct SwiftRex_ToDoList_PersistedApp: App {
+    @StateObject var store = World
+        .origin
+        .store()
+        .asObservableViewModel(initialState: .empty)
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Router.taskListView(store: store)
         }
     }
 }

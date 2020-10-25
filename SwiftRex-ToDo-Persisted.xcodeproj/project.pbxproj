@@ -3,16 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		CE8C8E512545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C8E502545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift */; };
-		CE8C8E532545C0FB003003C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C8E522545C0FB003003C5 /* ContentView.swift */; };
 		CE8C8E552545C0FC003003C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8C8E542545C0FC003003C5 /* Assets.xcassets */; };
 		CE8C8E582545C0FC003003C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8C8E572545C0FC003003C5 /* Preview Assets.xcassets */; };
 		CE8C8E632545C0FC003003C5 /* SwiftRex_ToDo_PersistedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C8E622545C0FC003003C5 /* SwiftRex_ToDo_PersistedTests.swift */; };
-		CE8C8E6E2545C0FC003003C5 /* SwiftRex_ToDo_PersistedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C8E6D2545C0FC003003C5 /* SwiftRex_ToDo_PersistedUITests.swift */; };
+		CE8C8E872545C14F003003C5 /* SPMLibraries.h in Headers */ = {isa = PBXBuildFile; fileRef = CE8C8E852545C14F003003C5 /* SPMLibraries.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEDF2D772545D29C00F76DCA /* CombineRex in Frameworks */ = {isa = PBXBuildFile; productRef = CEDF2D762545D29C00F76DCA /* CombineRex */; };
+		CEDF2D7D2545D42A00F76DCA /* SPMLibraries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8C8E832545C14F003003C5 /* SPMLibraries.framework */; };
+		CEDF2D842545D44700F76DCA /* SPMLibraries.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE8C8E832545C14F003003C5 /* SPMLibraries.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEDF2D882545D49D00F76DCA /* ReduxFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2D872545D49D00F76DCA /* ReduxFramework.swift */; };
+		CEDF2D8D2545D4EE00F76DCA /* LoggerMiddleware in Frameworks */ = {isa = PBXBuildFile; productRef = CEDF2D8C2545D4EE00F76DCA /* LoggerMiddleware */; };
+		CEDF2D912545D52A00F76DCA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2D902545D52A00F76DCA /* Router.swift */; };
+		CEDF2D962545D56B00F76DCA /* CombineRextensions in Frameworks */ = {isa = PBXBuildFile; productRef = CEDF2D952545D56B00F76DCA /* CombineRextensions */; };
+		CEDF2D9C2545D5AD00F76DCA /* ViewProducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2D9B2545D5AD00F76DCA /* ViewProducers.swift */; };
+		CEDF2DA02545D5CD00F76DCA /* ActionPrism.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2D9F2545D5CD00F76DCA /* ActionPrism.swift */; };
+		CEDF2DA72545D61B00F76DCA /* AppLifecycleMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DA62545D61B00F76DCA /* AppLifecycleMiddleware.swift */; };
+		CEDF2DAB2545D63A00F76DCA /* PersistenceMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DAA2545D63A00F76DCA /* PersistenceMiddleware.swift */; };
+		CEDF2DB22545D66100F76DCA /* TaskObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DB12545D66100F76DCA /* TaskObject.swift */; };
+		CEDF2DBA2545D72700F76DCA /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CEDF2DB92545D72700F76DCA /* Realm */; };
+		CEDF2DBC2545D72700F76DCA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEDF2DBB2545D72700F76DCA /* RealmSwift */; };
+		CEDF2DC02545D7A900F76DCA /* RealmPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DBF2545D7A900F76DCA /* RealmPersistenceService.swift */; };
+		CEDF2DC72545D7DB00F76DCA /* TaskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DC62545D7DB00F76DCA /* TaskCellView.swift */; };
+		CEDF2DCB2545D7FB00F76DCA /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DCA2545D7FB00F76DCA /* TaskList.swift */; };
+		CEDF2DD22545D82A00F76DCA /* ConditionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DD12545D82A00F76DCA /* ConditionalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,28 +40,52 @@
 			remoteGlobalIDString = CE8C8E4C2545C0FB003003C5;
 			remoteInfo = "SwiftRex-ToDo-Persisted";
 		};
-		CE8C8E6A2545C0FC003003C5 /* PBXContainerItemProxy */ = {
+		CEDF2D7F2545D42A00F76DCA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE8C8E452545C0FB003003C5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CE8C8E4C2545C0FB003003C5;
-			remoteInfo = "SwiftRex-ToDo-Persisted";
+			remoteGlobalIDString = CE8C8E822545C14F003003C5;
+			remoteInfo = SPMLibraries;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CEDF2D812545D42B00F76DCA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CEDF2D842545D44700F76DCA /* SPMLibraries.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE8C8E4D2545C0FB003003C5 /* SwiftRex-ToDo-Persisted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftRex-ToDo-Persisted.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8C8E502545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRex_ToDo_PersistedApp.swift; sourceTree = "<group>"; };
-		CE8C8E522545C0FB003003C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE8C8E542545C0FC003003C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE8C8E572545C0FC003003C5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE8C8E592545C0FC003003C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE8C8E5E2545C0FC003003C5 /* SwiftRex-ToDo-PersistedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftRex-ToDo-PersistedTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8C8E622545C0FC003003C5 /* SwiftRex_ToDo_PersistedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRex_ToDo_PersistedTests.swift; sourceTree = "<group>"; };
 		CE8C8E642545C0FC003003C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE8C8E692545C0FC003003C5 /* SwiftRex-ToDo-PersistedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftRex-ToDo-PersistedUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE8C8E6D2545C0FC003003C5 /* SwiftRex_ToDo_PersistedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRex_ToDo_PersistedUITests.swift; sourceTree = "<group>"; };
-		CE8C8E6F2545C0FC003003C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE8C8E832545C14F003003C5 /* SPMLibraries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SPMLibraries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE8C8E852545C14F003003C5 /* SPMLibraries.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPMLibraries.h; sourceTree = "<group>"; };
+		CE8C8E862545C14F003003C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEDF2D872545D49D00F76DCA /* ReduxFramework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxFramework.swift; sourceTree = "<group>"; };
+		CEDF2D902545D52A00F76DCA /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		CEDF2D9B2545D5AD00F76DCA /* ViewProducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProducers.swift; sourceTree = "<group>"; };
+		CEDF2D9F2545D5CD00F76DCA /* ActionPrism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPrism.swift; sourceTree = "<group>"; };
+		CEDF2DA62545D61B00F76DCA /* AppLifecycleMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleMiddleware.swift; sourceTree = "<group>"; };
+		CEDF2DAA2545D63A00F76DCA /* PersistenceMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceMiddleware.swift; sourceTree = "<group>"; };
+		CEDF2DB12545D66100F76DCA /* TaskObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskObject.swift; sourceTree = "<group>"; };
+		CEDF2DBF2545D7A900F76DCA /* RealmPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPersistenceService.swift; sourceTree = "<group>"; };
+		CEDF2DC62545D7DB00F76DCA /* TaskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellView.swift; sourceTree = "<group>"; };
+		CEDF2DCA2545D7FB00F76DCA /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		CEDF2DD12545D82A00F76DCA /* ConditionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDF2D7D2545D42A00F76DCA /* SPMLibraries.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,10 +104,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE8C8E662545C0FC003003C5 /* Frameworks */ = {
+		CE8C8E802545C14F003003C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDF2D8D2545D4EE00F76DCA /* LoggerMiddleware in Frameworks */,
+				CEDF2D962545D56B00F76DCA /* CombineRextensions in Frameworks */,
+				CEDF2DBA2545D72700F76DCA /* Realm in Frameworks */,
+				CEDF2DBC2545D72700F76DCA /* RealmSwift in Frameworks */,
+				CEDF2D772545D29C00F76DCA /* CombineRex in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,8 +124,9 @@
 			children = (
 				CE8C8E4F2545C0FB003003C5 /* SwiftRex-ToDo-Persisted */,
 				CE8C8E612545C0FC003003C5 /* SwiftRex-ToDo-PersistedTests */,
-				CE8C8E6C2545C0FC003003C5 /* SwiftRex-ToDo-PersistedUITests */,
+				CE8C8E842545C14F003003C5 /* SPMLibraries */,
 				CE8C8E4E2545C0FB003003C5 /* Products */,
+				CE8C8E972545C2D9003003C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,7 +135,7 @@
 			children = (
 				CE8C8E4D2545C0FB003003C5 /* SwiftRex-ToDo-Persisted.app */,
 				CE8C8E5E2545C0FC003003C5 /* SwiftRex-ToDo-PersistedTests.xctest */,
-				CE8C8E692545C0FC003003C5 /* SwiftRex-ToDo-PersistedUITests.xctest */,
+				CE8C8E832545C14F003003C5 /* SPMLibraries.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -96,7 +144,12 @@
 			isa = PBXGroup;
 			children = (
 				CE8C8E502545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift */,
-				CE8C8E522545C0FB003003C5 /* ContentView.swift */,
+				CEDF2DA32545D5F200F76DCA /* App */,
+				CEDF2DD52545D82D00F76DCA /* Library */,
+				CEDF2DC32545D7B600F76DCA /* Services */,
+				CEDF2DB52545D66B00F76DCA /* Model */,
+				CEDF2DCE2545D80500F76DCA /* Views */,
+				CEDF2DAE2545D64300F76DCA /* Middleware */,
 				CE8C8E542545C0FC003003C5 /* Assets.xcassets */,
 				CE8C8E592545C0FC003003C5 /* Info.plist */,
 				CE8C8E562545C0FC003003C5 /* Preview Content */,
@@ -121,16 +174,87 @@
 			path = "SwiftRex-ToDo-PersistedTests";
 			sourceTree = "<group>";
 		};
-		CE8C8E6C2545C0FC003003C5 /* SwiftRex-ToDo-PersistedUITests */ = {
+		CE8C8E842545C14F003003C5 /* SPMLibraries */ = {
 			isa = PBXGroup;
 			children = (
-				CE8C8E6D2545C0FC003003C5 /* SwiftRex_ToDo_PersistedUITests.swift */,
-				CE8C8E6F2545C0FC003003C5 /* Info.plist */,
+				CE8C8E852545C14F003003C5 /* SPMLibraries.h */,
+				CE8C8E862545C14F003003C5 /* Info.plist */,
 			);
-			path = "SwiftRex-ToDo-PersistedUITests";
+			path = SPMLibraries;
+			sourceTree = "<group>";
+		};
+		CE8C8E972545C2D9003003C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CEDF2DA32545D5F200F76DCA /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF2D872545D49D00F76DCA /* ReduxFramework.swift */,
+				CEDF2D9F2545D5CD00F76DCA /* ActionPrism.swift */,
+				CEDF2D9B2545D5AD00F76DCA /* ViewProducers.swift */,
+				CEDF2D902545D52A00F76DCA /* Router.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		CEDF2DAE2545D64300F76DCA /* Middleware */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF2DA62545D61B00F76DCA /* AppLifecycleMiddleware.swift */,
+				CEDF2DAA2545D63A00F76DCA /* PersistenceMiddleware.swift */,
+			);
+			path = Middleware;
+			sourceTree = "<group>";
+		};
+		CEDF2DB52545D66B00F76DCA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF2DB12545D66100F76DCA /* TaskObject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEDF2DC32545D7B600F76DCA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF2DBF2545D7A900F76DCA /* RealmPersistenceService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CEDF2DCE2545D80500F76DCA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF2DC62545D7DB00F76DCA /* TaskCellView.swift */,
+				CEDF2DCA2545D7FB00F76DCA /* TaskList.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CEDF2DD52545D82D00F76DCA /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF2DD12545D82A00F76DCA /* ConditionalView.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CE8C8E7E2545C14F003003C5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE8C8E872545C14F003003C5 /* SPMLibraries.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		CE8C8E4C2545C0FB003003C5 /* SwiftRex-ToDo-Persisted */ = {
@@ -140,10 +264,12 @@
 				CE8C8E492545C0FB003003C5 /* Sources */,
 				CE8C8E4A2545C0FB003003C5 /* Frameworks */,
 				CE8C8E4B2545C0FB003003C5 /* Resources */,
+				CEDF2D812545D42B00F76DCA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CEDF2D802545D42A00F76DCA /* PBXTargetDependency */,
 			);
 			name = "SwiftRex-ToDo-Persisted";
 			productName = "SwiftRex-ToDo-Persisted";
@@ -164,27 +290,36 @@
 				CE8C8E602545C0FC003003C5 /* PBXTargetDependency */,
 			);
 			name = "SwiftRex-ToDo-PersistedTests";
+			packageProductDependencies = (
+			);
 			productName = "SwiftRex-ToDo-PersistedTests";
 			productReference = CE8C8E5E2545C0FC003003C5 /* SwiftRex-ToDo-PersistedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CE8C8E682545C0FC003003C5 /* SwiftRex-ToDo-PersistedUITests */ = {
+		CE8C8E822545C14F003003C5 /* SPMLibraries */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CE8C8E782545C0FC003003C5 /* Build configuration list for PBXNativeTarget "SwiftRex-ToDo-PersistedUITests" */;
+			buildConfigurationList = CE8C8E8C2545C14F003003C5 /* Build configuration list for PBXNativeTarget "SPMLibraries" */;
 			buildPhases = (
-				CE8C8E652545C0FC003003C5 /* Sources */,
-				CE8C8E662545C0FC003003C5 /* Frameworks */,
-				CE8C8E672545C0FC003003C5 /* Resources */,
+				CE8C8E7E2545C14F003003C5 /* Headers */,
+				CE8C8E7F2545C14F003003C5 /* Sources */,
+				CE8C8E802545C14F003003C5 /* Frameworks */,
+				CE8C8E812545C14F003003C5 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CE8C8E6B2545C0FC003003C5 /* PBXTargetDependency */,
 			);
-			name = "SwiftRex-ToDo-PersistedUITests";
-			productName = "SwiftRex-ToDo-PersistedUITests";
-			productReference = CE8C8E692545C0FC003003C5 /* SwiftRex-ToDo-PersistedUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
+			name = SPMLibraries;
+			packageProductDependencies = (
+				CEDF2D762545D29C00F76DCA /* CombineRex */,
+				CEDF2D8C2545D4EE00F76DCA /* LoggerMiddleware */,
+				CEDF2D952545D56B00F76DCA /* CombineRextensions */,
+				CEDF2DB92545D72700F76DCA /* Realm */,
+				CEDF2DBB2545D72700F76DCA /* RealmSwift */,
+			);
+			productName = SPMLibraries;
+			productReference = CE8C8E832545C14F003003C5 /* SPMLibraries.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -202,9 +337,8 @@
 						CreatedOnToolsVersion = 12.1;
 						TestTargetID = CE8C8E4C2545C0FB003003C5;
 					};
-					CE8C8E682545C0FC003003C5 = {
+					CE8C8E822545C14F003003C5 = {
 						CreatedOnToolsVersion = 12.1;
-						TestTargetID = CE8C8E4C2545C0FB003003C5;
 					};
 				};
 			};
@@ -217,13 +351,19 @@
 				Base,
 			);
 			mainGroup = CE8C8E442545C0FB003003C5;
+			packageReferences = (
+				CEDF2D732545D28A00F76DCA /* XCRemoteSwiftPackageReference "SwiftRex" */,
+				CEDF2D8B2545D4EE00F76DCA /* XCRemoteSwiftPackageReference "LoggerMiddleware" */,
+				CEDF2D942545D56B00F76DCA /* XCRemoteSwiftPackageReference "CombineRextensions" */,
+				CEDF2DB82545D72700F76DCA /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+			);
 			productRefGroup = CE8C8E4E2545C0FB003003C5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				CE8C8E4C2545C0FB003003C5 /* SwiftRex-ToDo-Persisted */,
 				CE8C8E5D2545C0FC003003C5 /* SwiftRex-ToDo-PersistedTests */,
-				CE8C8E682545C0FC003003C5 /* SwiftRex-ToDo-PersistedUITests */,
+				CE8C8E822545C14F003003C5 /* SPMLibraries */,
 			);
 		};
 /* End PBXProject section */
@@ -245,7 +385,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE8C8E672545C0FC003003C5 /* Resources */ = {
+		CE8C8E812545C14F003003C5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -259,8 +399,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8C8E532545C0FB003003C5 /* ContentView.swift in Sources */,
+				CEDF2DA72545D61B00F76DCA /* AppLifecycleMiddleware.swift in Sources */,
+				CEDF2DCB2545D7FB00F76DCA /* TaskList.swift in Sources */,
+				CEDF2D9C2545D5AD00F76DCA /* ViewProducers.swift in Sources */,
+				CEDF2DA02545D5CD00F76DCA /* ActionPrism.swift in Sources */,
+				CEDF2DC02545D7A900F76DCA /* RealmPersistenceService.swift in Sources */,
+				CEDF2D912545D52A00F76DCA /* Router.swift in Sources */,
+				CEDF2DAB2545D63A00F76DCA /* PersistenceMiddleware.swift in Sources */,
+				CEDF2DB22545D66100F76DCA /* TaskObject.swift in Sources */,
+				CEDF2D882545D49D00F76DCA /* ReduxFramework.swift in Sources */,
 				CE8C8E512545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift in Sources */,
+				CEDF2DC72545D7DB00F76DCA /* TaskCellView.swift in Sources */,
+				CEDF2DD22545D82A00F76DCA /* ConditionalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,11 +422,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE8C8E652545C0FC003003C5 /* Sources */ = {
+		CE8C8E7F2545C14F003003C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8C8E6E2545C0FC003003C5 /* SwiftRex_ToDo_PersistedUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,10 +437,10 @@
 			target = CE8C8E4C2545C0FB003003C5 /* SwiftRex-ToDo-Persisted */;
 			targetProxy = CE8C8E5F2545C0FC003003C5 /* PBXContainerItemProxy */;
 		};
-		CE8C8E6B2545C0FC003003C5 /* PBXTargetDependency */ = {
+		CEDF2D802545D42A00F76DCA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CE8C8E4C2545C0FB003003C5 /* SwiftRex-ToDo-Persisted */;
-			targetProxy = CE8C8E6A2545C0FC003003C5 /* PBXContainerItemProxy */;
+			target = CE8C8E822545C14F003003C5 /* SPMLibraries */;
+			targetProxy = CEDF2D7F2545D42A00F76DCA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -500,43 +649,59 @@
 			};
 			name = Release;
 		};
-		CE8C8E792545C0FC003003C5 /* Debug */ = {
+		CE8C8E8D2545C14F003003C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = D98V54KELR;
-				INFOPLIST_FILE = "SwiftRex-ToDo-PersistedUITests/Info.plist";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SPMLibraries/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.awardvetsci.SwiftRex-ToDo-PersistedUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.awardvetsci.SPMLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SwiftRex-ToDo-Persisted";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		CE8C8E7A2545C0FC003003C5 /* Release */ = {
+		CE8C8E8E2545C14F003003C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = D98V54KELR;
-				INFOPLIST_FILE = "SwiftRex-ToDo-PersistedUITests/Info.plist";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SPMLibraries/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.awardvetsci.SwiftRex-ToDo-PersistedUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.awardvetsci.SPMLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SwiftRex-ToDo-Persisted";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -570,16 +735,79 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CE8C8E782545C0FC003003C5 /* Build configuration list for PBXNativeTarget "SwiftRex-ToDo-PersistedUITests" */ = {
+		CE8C8E8C2545C14F003003C5 /* Build configuration list for PBXNativeTarget "SPMLibraries" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE8C8E792545C0FC003003C5 /* Debug */,
-				CE8C8E7A2545C0FC003003C5 /* Release */,
+				CE8C8E8D2545C14F003003C5 /* Debug */,
+				CE8C8E8E2545C14F003003C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CEDF2D732545D28A00F76DCA /* XCRemoteSwiftPackageReference "SwiftRex" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swiftrex/SwiftRex.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.8;
+			};
+		};
+		CEDF2D8B2545D4EE00F76DCA /* XCRemoteSwiftPackageReference "LoggerMiddleware" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftRex/LoggerMiddleware";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.2;
+			};
+		};
+		CEDF2D942545D56B00F76DCA /* XCRemoteSwiftPackageReference "CombineRextensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftRex/CombineRextensions";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		CEDF2DB82545D72700F76DCA /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CEDF2D762545D29C00F76DCA /* CombineRex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDF2D732545D28A00F76DCA /* XCRemoteSwiftPackageReference "SwiftRex" */;
+			productName = CombineRex;
+		};
+		CEDF2D8C2545D4EE00F76DCA /* LoggerMiddleware */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDF2D8B2545D4EE00F76DCA /* XCRemoteSwiftPackageReference "LoggerMiddleware" */;
+			productName = LoggerMiddleware;
+		};
+		CEDF2D952545D56B00F76DCA /* CombineRextensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDF2D942545D56B00F76DCA /* XCRemoteSwiftPackageReference "CombineRextensions" */;
+			productName = CombineRextensions;
+		};
+		CEDF2DB92545D72700F76DCA /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDF2DB82545D72700F76DCA /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		CEDF2DBB2545D72700F76DCA /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDF2DB82545D72700F76DCA /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE8C8E452545C0FB003003C5 /* Project object */;
 }
