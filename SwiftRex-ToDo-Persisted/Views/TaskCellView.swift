@@ -18,7 +18,6 @@ struct TaskCellView: View {
     
     var body: some View {
         HStack {
-            Text("\(viewModel.state.index)")
             TextField("Enter task here...", text: viewModel.binding[\.name] { Action.update($0) })
                 .disabled(true)
         }
