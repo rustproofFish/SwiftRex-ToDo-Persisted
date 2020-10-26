@@ -8,18 +8,10 @@
 import Foundation
 import Combine
 
-import RealmSwift
 import SwiftRex
 
-/*
- - when app first launched, connect to the store (crash and produce diagnostics if any issue here)
- - observe all AppActions - we may want to respond to multiple unconnected substates, e.g. AppLifecycle, specific view-associated Actions
- - start observing the persistent store when the app becomes active in the background
- - stop observing the persistent store when the app becomes inactive
- - use a loopback approach, i.e. the Middleware responds to lifecycle / view Actions by dispatching Middleware-specific actions which result in the desired side effects. For example, AppLifecycleAction.willBecomeInactive -> dispatch(MiddlewareAction.cancelSubscription) -> cancel the subscription to Publishers of persisted objects
- - the above approach is recommended although the side effect will be delayed by one RunLoop - will this be a significant delay?
- */
 
+#warning("Implement external logging framework as Middleware")
 // MARK: - ACTION
 enum PersistentStoreAction {
     case connectToStore // TODO: Not impl yet - use for Realm Sync connection
@@ -57,12 +49,12 @@ extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskO
 class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.RealmObject == TaskObject {
     typealias InputActionType = PersistentStoreAction
     typealias OutputActionType = PersistentStoreAction
-    typealias StateType = Void // leave as is for now but might want to set some global flags relating to the status of the store
+    typealias StateType = Void /// leave as is for now but might want to set some global flags relating to the status of the store
     
     private let service: S
     private let state: StateType
     private var output: AnyActionHandler<OutputActionType>!
-    private var cancelleable = Set<AnyCancellable>()
+    private var cancellable = Set<AnyCancellable>()
     
     
     init(service: S) {
@@ -81,7 +73,7 @@ class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.Realm
         case .connectToStore:
             NSLog("Connect to store - NOT IMPLEMENTED")
         case .subscribeToStoreChanges:
-            subscribe(to: service.all())
+            subscribeToStore(publisher: service.all())
         case .cancelStoreSubscription:
             cancelSubscription()
         case let .add(task):
@@ -102,19 +94,17 @@ class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.Realm
         // TODO: - IMPL
     }
     
-    private func subscribe(to publisher: AnyPublisher<[TaskObject.DTO], Never>) {
+    private func subscribeToStore(publisher: AnyPublisher<[TaskObject.DTO], Never>) {
         /// accept a Publisher and subscribes to it
         /// objects received ([TaskObject.DTO] in this example) encapsulated in an Action and dispatched to the ActionHandler. State then modified by a Reducer
         // TODO: - handle errors here?
         publisher
-            .assertNoFailure() // refactor for better error handling e.g. return empty array and log error
+            .assertNoFailure() // TODO: refactor for better error handling e.g. return empty array and log error
             .sink { self.output.dispatch(.taskListModified($0)) }
-            .store(in: &cancelleable)
+            .store(in: &cancellable)
     }
     
     private func cancelSubscription() {
-        _ = cancelleable
-            .map { $0.cancel() } // this might be a redundent step
-        cancelleable.removeAll()
+        cancellable = Set<AnyCancellable>()
     }
 }

@@ -36,8 +36,8 @@ final class TaskObject: Object {
 
 extension TaskObject: DTORepresentable {
     struct DTO: Equatable, Identifiable {
-        fileprivate (set) var id: String = UUID().uuidString // identifier shouldn't be set directly - only allocated when Task Objects are instantiated
-        var _index: Int? // index is dependent on the number of tasks so should only be set by the persistence layer
+        fileprivate (set) var id: String = UUID().uuidString /// identifier shouldn't be set directly - only allocated when Task Objects are instantiated
+        var _index: Int? /// index is dependent on the number of tasks so should only be set by the persistence layer
         var index: Int {
             get {
                 guard let idx = _index else { fatalError("Attempting to access index before value has been set") }
@@ -65,3 +65,4 @@ extension TaskObject: DTORepresentable {
         return dto
     }
 }
+

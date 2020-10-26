@@ -164,8 +164,8 @@ final class RealmPersistenceService: PersistanceService {
                 }
         }
     }
-
     
+    // MARK: - DEINIT
     deinit {
         cancellables = []
     }
