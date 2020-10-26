@@ -30,6 +30,8 @@
 		CEDF2DC72545D7DB00F76DCA /* TaskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DC62545D7DB00F76DCA /* TaskCellView.swift */; };
 		CEDF2DCB2545D7FB00F76DCA /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DCA2545D7FB00F76DCA /* TaskList.swift */; };
 		CEDF2DD22545D82A00F76DCA /* ConditionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DD12545D82A00F76DCA /* ConditionalView.swift */; };
+		CEE0205825470BB600C48EE6 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0205725470BB600C48EE6 /* TaskCellViewModel.swift */; };
+		CEE0206125470E6D00C48EE6 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0206025470E6D00C48EE6 /* TaskListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		CEDF2DC62545D7DB00F76DCA /* TaskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellView.swift; sourceTree = "<group>"; };
 		CEDF2DCA2545D7FB00F76DCA /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 		CEDF2DD12545D82A00F76DCA /* ConditionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalView.swift; sourceTree = "<group>"; };
+		CEE0205725470BB600C48EE6 /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
+		CEE0206025470E6D00C48EE6 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,8 +233,8 @@
 		CEDF2DCE2545D80500F76DCA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CEDF2DC62545D7DB00F76DCA /* TaskCellView.swift */,
-				CEDF2DCA2545D7FB00F76DCA /* TaskList.swift */,
+				CEE0205B25470E3400C48EE6 /* TaskCell */,
+				CEE0206425470ECE00C48EE6 /* TaskList */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -241,6 +245,24 @@
 				CEDF2DD12545D82A00F76DCA /* ConditionalView.swift */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		CEE0205B25470E3400C48EE6 /* TaskCell */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF2DC62545D7DB00F76DCA /* TaskCellView.swift */,
+				CEE0205725470BB600C48EE6 /* TaskCellViewModel.swift */,
+			);
+			path = TaskCell;
+			sourceTree = "<group>";
+		};
+		CEE0206425470ECE00C48EE6 /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF2DCA2545D7FB00F76DCA /* TaskList.swift */,
+				CEE0206025470E6D00C48EE6 /* TaskListViewModel.swift */,
+			);
+			path = TaskList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,11 +428,13 @@
 				CEDF2DC02545D7A900F76DCA /* RealmPersistenceService.swift in Sources */,
 				CEDF2D912545D52A00F76DCA /* Router.swift in Sources */,
 				CEDF2DAB2545D63A00F76DCA /* PersistenceMiddleware.swift in Sources */,
+				CEE0206125470E6D00C48EE6 /* TaskListViewModel.swift in Sources */,
 				CEDF2DB22545D66100F76DCA /* TaskObject.swift in Sources */,
 				CEDF2D882545D49D00F76DCA /* ReduxFramework.swift in Sources */,
 				CE8C8E512545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift in Sources */,
 				CEDF2DC72545D7DB00F76DCA /* TaskCellView.swift in Sources */,
 				CEDF2DD22545D82A00F76DCA /* ConditionalView.swift in Sources */,
+				CEE0205825470BB600C48EE6 /* TaskCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

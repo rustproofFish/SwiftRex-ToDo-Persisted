@@ -84,13 +84,8 @@ extension Reducer where ActionType == ListAction, StateType == [TaskObject.DTO] 
     static let list = Reducer { action, state in
         var state = state
         switch action {
-//        case let .add(task): // Now handled by PersistenceMiddleware
-//            state.append(task)
-//        case let .delete(id): // Now handled by PersistenceMiddleware
-//            state.remove(atOffsets: offset)
-//        case let .move(offset, index):
-//            state.move(fromOffsets: offset, toOffset: index)
         case .appear:
+            // TODO: - Implement additional Logger middleware for debugging
             print("** VIEW onAppear CALLED **")
         default:
             break
