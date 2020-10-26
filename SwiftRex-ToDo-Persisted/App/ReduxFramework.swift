@@ -70,14 +70,14 @@ extension Reducer where ActionType == AppAction, StateType == AppState {
             action: \AppAction.appLifecycle,
             state: \AppState.appLifecycle
         ) <> Reducer<PersistentStoreAction, [TaskObject.DTO]>.persistentStore.lift(
-        action: \AppAction.persistentStore,
-        state: \AppState.tasks
-    ) <> Reducer<ListAction, [TaskObject.DTO]>.list.lift(
+            action: \AppAction.persistentStore,
+            state: \AppState.tasks
+        ) <> Reducer<ListAction, [TaskObject.DTO]>.list.lift(
             action: \AppAction.list,
             state: \AppState.tasks
         ) <> Reducer<TaskAction, [TaskObject.DTO]>.task.lift(
-                action: \AppAction.task,
-                state: \AppState.tasks)
+            action: \AppAction.task,
+            state: \AppState.tasks)
 }
 
 extension Reducer where ActionType == ListAction, StateType == [TaskObject.DTO] {
@@ -120,10 +120,26 @@ let appMiddleware =
         stateMap: { _ in }
     )
     <> PersistentStoreMiddleware(service: RealmPersistenceService()).lift(  // TODO: Should be injected by World....
-        inputActionMap: { $0 },
+        inputActionMap: { globalAction in
+            switch globalAction {
+            case .appLifecycle(.didBecomeActive):
+                return .subscribeToStoreChanges
+            case .appLifecycle(.willBecomeInactive):
+                return .cancelStoreSubscription
+            case let .list(.add(task)):
+                return .add(task)
+            case let .list(.delete(id)):
+                return .deleteTask(id)
+            case let .list(.move(origin, offset)):
+                return .moveTask(origin, offset)
+            default:
+                return nil
+            }
+        },
         outputActionMap: AppAction.persistentStore,
-        stateMap: { _ in } // i.e. Never
+        stateMap: { _ in } /// i.e. Never
     )
+
 
 
 // MARK: - STORE

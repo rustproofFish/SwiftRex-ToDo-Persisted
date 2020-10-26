@@ -12,7 +12,6 @@
 		CE8C8E582545C0FC003003C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8C8E572545C0FC003003C5 /* Preview Assets.xcassets */; };
 		CE8C8E632545C0FC003003C5 /* SwiftRex_ToDo_PersistedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C8E622545C0FC003003C5 /* SwiftRex_ToDo_PersistedTests.swift */; };
 		CE8C8E872545C14F003003C5 /* SPMLibraries.h in Headers */ = {isa = PBXBuildFile; fileRef = CE8C8E852545C14F003003C5 /* SPMLibraries.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CEDF2D772545D29C00F76DCA /* CombineRex in Frameworks */ = {isa = PBXBuildFile; productRef = CEDF2D762545D29C00F76DCA /* CombineRex */; };
 		CEDF2D7D2545D42A00F76DCA /* SPMLibraries.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8C8E832545C14F003003C5 /* SPMLibraries.framework */; };
 		CEDF2D842545D44700F76DCA /* SPMLibraries.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE8C8E832545C14F003003C5 /* SPMLibraries.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEDF2D882545D49D00F76DCA /* ReduxFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2D872545D49D00F76DCA /* ReduxFramework.swift */; };
@@ -32,6 +31,7 @@
 		CEDF2DD22545D82A00F76DCA /* ConditionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF2DD12545D82A00F76DCA /* ConditionalView.swift */; };
 		CEE0205825470BB600C48EE6 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0205725470BB600C48EE6 /* TaskCellViewModel.swift */; };
 		CEE0206125470E6D00C48EE6 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0206025470E6D00C48EE6 /* TaskListViewModel.swift */; };
+		CEE38196254730A20077E5EE /* CombineRex in Frameworks */ = {isa = PBXBuildFile; productRef = CEE38195254730A20077E5EE /* CombineRex */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,8 +115,8 @@
 				CEDF2D8D2545D4EE00F76DCA /* LoggerMiddleware in Frameworks */,
 				CEDF2D962545D56B00F76DCA /* CombineRextensions in Frameworks */,
 				CEDF2DBA2545D72700F76DCA /* Realm in Frameworks */,
+				CEE38196254730A20077E5EE /* CombineRex in Frameworks */,
 				CEDF2DBC2545D72700F76DCA /* RealmSwift in Frameworks */,
-				CEDF2D772545D29C00F76DCA /* CombineRex in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +294,8 @@
 				CEDF2D802545D42A00F76DCA /* PBXTargetDependency */,
 			);
 			name = "SwiftRex-ToDo-Persisted";
+			packageProductDependencies = (
+			);
 			productName = "SwiftRex-ToDo-Persisted";
 			productReference = CE8C8E4D2545C0FB003003C5 /* SwiftRex-ToDo-Persisted.app */;
 			productType = "com.apple.product-type.application";
@@ -333,11 +335,11 @@
 			);
 			name = SPMLibraries;
 			packageProductDependencies = (
-				CEDF2D762545D29C00F76DCA /* CombineRex */,
 				CEDF2D8C2545D4EE00F76DCA /* LoggerMiddleware */,
 				CEDF2D952545D56B00F76DCA /* CombineRextensions */,
 				CEDF2DB92545D72700F76DCA /* Realm */,
 				CEDF2DBB2545D72700F76DCA /* RealmSwift */,
+				CEE38195254730A20077E5EE /* CombineRex */,
 			);
 			productName = SPMLibraries;
 			productReference = CE8C8E832545C14F003003C5 /* SPMLibraries.framework */;
@@ -374,10 +376,10 @@
 			);
 			mainGroup = CE8C8E442545C0FB003003C5;
 			packageReferences = (
-				CEDF2D732545D28A00F76DCA /* XCRemoteSwiftPackageReference "SwiftRex" */,
 				CEDF2D8B2545D4EE00F76DCA /* XCRemoteSwiftPackageReference "LoggerMiddleware" */,
 				CEDF2D942545D56B00F76DCA /* XCRemoteSwiftPackageReference "CombineRextensions" */,
 				CEDF2DB82545D72700F76DCA /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				CE8B48BF25472E3C00B02136 /* XCRemoteSwiftPackageReference "SwiftRex" */,
 			);
 			productRefGroup = CE8C8E4E2545C0FB003003C5 /* Products */;
 			projectDirPath = "";
@@ -771,9 +773,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CEDF2D732545D28A00F76DCA /* XCRemoteSwiftPackageReference "SwiftRex" */ = {
+		CE8B48BF25472E3C00B02136 /* XCRemoteSwiftPackageReference "SwiftRex" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/swiftrex/SwiftRex.git";
+			repositoryURL = "https://github.com/SwiftRex/SwiftRex";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.7.8;
@@ -806,11 +808,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CEDF2D762545D29C00F76DCA /* CombineRex */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CEDF2D732545D28A00F76DCA /* XCRemoteSwiftPackageReference "SwiftRex" */;
-			productName = CombineRex;
-		};
 		CEDF2D8C2545D4EE00F76DCA /* LoggerMiddleware */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CEDF2D8B2545D4EE00F76DCA /* XCRemoteSwiftPackageReference "LoggerMiddleware" */;
@@ -830,6 +827,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEDF2DB82545D72700F76DCA /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		CEE38195254730A20077E5EE /* CombineRex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE8B48BF25472E3C00B02136 /* XCRemoteSwiftPackageReference "SwiftRex" */;
+			productName = CombineRex;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

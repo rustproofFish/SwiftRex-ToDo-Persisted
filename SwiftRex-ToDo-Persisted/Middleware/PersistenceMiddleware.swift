@@ -22,9 +22,12 @@ import SwiftRex
 
 // MARK: - ACTION
 enum PersistentStoreAction {
-    case connectToStore
-    case subscribeToChanges
-    case cancelSubscription
+    case connectToStore // TODO: Not impl yet - use for Realm Sync connection
+    case subscribeToStoreChanges
+    case cancelStoreSubscription
+    case add(TaskObject.DTO)
+    case deleteTask(String)
+    case moveTask(IndexSet, Int)
     case taskListModified([TaskObject.DTO])
 }
 
@@ -36,12 +39,14 @@ extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskO
         switch action {
         case .connectToStore:
             NSLog("Connecting to store")
-        case .subscribeToChanges:
+        case .subscribeToStoreChanges:
             NSLog("Subscribing for Realm changes")
-        case .cancelSubscription:
+        case .cancelStoreSubscription:
             NSLog("Connecting to store")
         case .taskListModified(let value): // TODO: - Not sure if this is most efficient or should use ChangeSet?
             state = value
+        default:
+            break
         }
         return state
     }
@@ -50,7 +55,7 @@ extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskO
 
 //MARK: - MIDDLEWARE
 class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.RealmObject == TaskObject {
-    typealias InputActionType = AppAction // needs to respond to Actions generated throughout application
+    typealias InputActionType = PersistentStoreAction
     typealias OutputActionType = PersistentStoreAction
     typealias StateType = Void // leave as is for now but might want to set some global flags relating to the status of the store
     
@@ -71,24 +76,20 @@ class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.Realm
         self.output = output
     }
     
-    func handle(action: InputActionType, from dispatcher: ActionSource, afterReducer: inout AfterReducer) {
+    func handle(action: PersistentStoreAction, from dispatcher: ActionSource, afterReducer: inout AfterReducer) {
         switch action {
-        case .appLifecycle(.didBecomeActive):
-            output.dispatch(.subscribeToChanges)
-        case .appLifecycle(.willBecomeInactive):
-            output.dispatch(.cancelSubscription)
-            
-        case .persistentStore(.connectToStore):
-            print("*** Check store accessible ***")
-        case .persistentStore(.subscribeToChanges):
+        case .connectToStore:
+            NSLog("Connect to store - NOT IMPLEMENTED")
+        case .subscribeToStoreChanges:
             subscribe(to: service.all())
-            
-        case let .list(.add(task)):
+        case .cancelStoreSubscription:
+            cancelSubscription()
+        case let .add(task):
             service.add(object: task)
-        case let .list(.delete(id)):
+        case let .deleteTask(id):
             service.deleteObject(id: id)
-        case let .list(.move(fromIndex, toIndex)):
-            service.moveObject(from: fromIndex, to: toIndex)
+        case let .moveTask(origin, offset):
+            service.moveObject(from: origin, to: offset)
         default:
             break
         }
