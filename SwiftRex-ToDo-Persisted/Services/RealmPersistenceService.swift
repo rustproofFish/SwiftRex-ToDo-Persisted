@@ -12,21 +12,22 @@ import RealmSwift
 
 // MARK: - PROTOCOL
 protocol PersistanceService {
-    associatedtype RealmObject: DTORepresentable
-    var subject: CurrentValueSubject<[RealmObject.DTO], Never> { get }
+    associatedtype PersistableType
+    associatedtype DTO: DataTransferObject
+    var subject: CurrentValueSubject<[DTO], Never> { get }
     var cancellables: Set<AnyCancellable> { get }
     
-    func all(matching predicate: NSPredicate, in realm: Realm) -> AnyPublisher<[RealmObject.DTO], Never>
+    func all(matching predicate: NSPredicate, in realm: Realm) -> AnyPublisher<[DTO], Never>
     
-    func add(object properties: RealmObject.DTO, in realm: Realm) -> AnyPublisher<RealmObject, Never>
+    func add(object properties: DTO, in realm: Realm) -> AnyPublisher<PersistableType, Never>
     
-    func update(_ object: RealmObject, using dto: RealmObject.DTO, in realm: Realm)
+    func updateObject(_ id: String, using dto: DTO, in realm: Realm)
     
-    func delete(_ object: RealmObject, in realm: Realm)
+    func delete(_ object: PersistableType, in realm: Realm)
     
     func deleteObject(id: String, in realm: Realm)
     
-    func deleteObjects(matching predicate: (TaskObject) -> Bool, in realm: Realm)
+    func deleteObjects(matching predicate: (PersistableType) -> Bool, in realm: Realm)
     
     func moveObject(from orgin: IndexSet, to destination: Int, in realm: Realm)
 }
@@ -35,20 +36,20 @@ protocol PersistanceService {
 // MARK: - EXTENSION
 extension PersistanceService {
     // Using extension to allow default parameters for methods
-    func all(matching predicate: NSPredicate = NSPredicate(value: true), in realm: Realm = try! Realm()) -> AnyPublisher<[RealmObject.DTO], Never> {
+    func all(matching predicate: NSPredicate = NSPredicate(value: true), in realm: Realm = try! Realm()) -> AnyPublisher<[DTO], Never> {
         all(matching: predicate, in: realm)
     }
     
     @discardableResult
-    func add(object properties: RealmObject.DTO, in realm: Realm = try! Realm()) -> AnyPublisher<RealmObject, Never> {
+    func add(object properties: DTO, in realm: Realm = try! Realm()) -> AnyPublisher<PersistableType, Never> {
         add(object: properties, in: realm)
     }
     
-    func update(_ object: RealmObject, using dto: RealmObject.DTO, in realm: Realm = try! Realm()) {
-        update(object, using: dto, in: realm)
+    func updateObject(_ id: String, using dto: DTO, in realm: Realm = try! Realm()) {
+        updateObject(id, using: dto, in: realm)
     }
     
-    func delete(_ object: RealmObject, in realm: Realm = try! Realm()) {
+    func delete(_ object: PersistableType, in realm: Realm = try! Realm()) {
         delete(object, in: realm)
     }
     
@@ -56,7 +57,7 @@ extension PersistanceService {
         deleteObject(id: id, in: realm)
     }
     
-    func deleteObjects(matching predicate: (TaskObject) -> Bool, in realm: Realm = try! Realm()) {
+    func deleteObjects(matching predicate: (PersistableType) -> Bool, in realm: Realm = try! Realm()) {
         deleteObjects(matching: predicate, in: realm)
     }
     
@@ -71,13 +72,13 @@ final class RealmPersistenceService: PersistanceService {
     /// Not entirely comfortable about conversion to Array as we lose the lazy behaviour of Results...
     /// However Results cannot be direcly instantiated thus can't be used as the Element within a CurrentValueSubject
     /// Need to ensure that as much work (e.g. filtering, sorting) is done using Result prior to conversion to the DTO array
-    internal let subject = CurrentValueSubject<[TaskObject.DTO], Never>([])
+    internal let subject = CurrentValueSubject<[TaskDTO], Never>([])
     internal var cancellables = Set<AnyCancellable>()
     
     // TODO: - Consider rewriting to allow error handling related to Realm errors.
     // According to developers, Realm failures only arise on first attempt to access Realm on a given thread so trapping is only
     // required here...
-    func all(matching predicate: NSPredicate = NSPredicate(value: true), in realm: Realm) -> AnyPublisher<[TaskObject.DTO], Never> {
+    func all(matching predicate: NSPredicate = NSPredicate(value: true), in realm: Realm) -> AnyPublisher<[TaskDTO], Never> {
         realm.objects(TaskObject.self)
             .filter(predicate)
             .collectionPublisher
@@ -86,7 +87,7 @@ final class RealmPersistenceService: PersistanceService {
             .map { item in
                 item
                     .sorted(byKeyPath: "index") // TODO: Enable different sort descriptors
-                    .map { $0.convertToDTO() }
+                    .map { TaskDTO.from($0) }
             }
             
             .receive(on: DispatchQueue.main)
@@ -98,7 +99,7 @@ final class RealmPersistenceService: PersistanceService {
     
     
     @discardableResult
-    func add(object properties: TaskObject.DTO, in realm: Realm) -> AnyPublisher<TaskObject, Never> {
+    func add(object properties: TaskDTO, in realm: Realm) -> AnyPublisher<TaskObject, Never> {
         let index = realm.objects(TaskObject.self).count
         let task = TaskObject(index: index, name: properties.name)
         try! realm.write {
@@ -109,9 +110,11 @@ final class RealmPersistenceService: PersistanceService {
     }
     
     
-    func update(_ object: TaskObject, using dto: TaskObject.DTO, in realm: Realm) {
+    func updateObject(_ id: String, using dto: TaskDTO, in realm: Realm) {
         // TODO: Consider using rollback implementation in the event of errors
         // TODO: Return the amended Task or work on the assumption that no crash means success?
+        guard let object = realm.object(ofType: TaskObject.self, forPrimaryKey: id) else {
+        fatalError("No object with provided ID found in Realm") }
         try! realm.write {
             object.name = dto.name
         }

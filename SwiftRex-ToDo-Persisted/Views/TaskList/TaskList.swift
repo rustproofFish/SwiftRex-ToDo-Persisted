@@ -13,19 +13,23 @@ import SwiftRex
 
 // MARK: - UI CODE
 struct TaskList: View {
-    typealias Task = TaskObject.DTO
+    typealias Task = TaskDTO
     
     @ObservedObject var viewModel: ObservableViewModel<ViewAction, ViewState>
     @State private var editMode = EditMode.inactive
     @State private var taskName = ""
-    var rowProducer: ViewProducer<TaskObject.DTO, TaskCellView>
+    var rowProducer: ViewProducer<TaskDTO, TaskCellView>
     
     var body: some View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(viewModel.state.tasks) {
-                        rowProducer.view($0)
+                    ForEach(viewModel.state.tasks) { task in
+                        rowProducer.view(task)
+                            .onTapGesture(count: 1) {
+                                viewModel.state.selected = task.id
+                                taskName = task.name
+                            }
                     }
                     .onDelete(perform: {
                         viewModel.dispatch(.delete(viewModel.state.tasks[$0.first!].id))
@@ -46,8 +50,14 @@ struct TaskList: View {
                             Spacer()
                             
                             Button(action: {
-                                let dto = TaskObject.DTO(name: taskName)
-                                viewModel.dispatch(.add(dto))
+                                if let editId = viewModel.state.selected
+                                {
+                                    /// Passing a whole DTO rather than just the name so can add further editable values later 
+                                    viewModel.dispatch(.update(editId, TaskDTO(name: taskName)))
+                                } else {
+                                    let dto = TaskDTO(name: taskName)
+                                    viewModel.dispatch(.add(dto))
+                                }
                                 taskName.removeAll()
                             }) {
                                 Image(systemName: "plus")

@@ -22,10 +22,11 @@ enum AppAction {
 }
 
 enum ListAction {
-    case add(TaskObject.DTO)
+    case add(TaskDTO)
     case delete(String)
     case move(IndexSet, Int)
-    case appear // NEW
+    case select(IndexSet)
+    case update(String, TaskDTO)
 }
 
 enum TaskAction {
@@ -36,29 +37,40 @@ enum TaskAction {
 
 // MARK: - STATE
 struct AppState: Equatable {
-    typealias Task = TaskObject.DTO
+    typealias Task = TaskDTO
     
     var appLifecycle: AppLifecycle
     var tasks: [Task]
+    var taskListState: TaskListState
     
     static var empty: AppState {
-        .init(appLifecycle: .backgroundInactive, tasks: [])
+        .init(appLifecycle: .backgroundInactive, tasks: [], taskListState: .empty)
     }
     
     static func == (lhs: AppState, rhs: AppState) -> Bool {
-        (lhs.appLifecycle == rhs.appLifecycle) && (lhs.tasks == rhs.tasks)
+        (lhs.appLifecycle == rhs.appLifecycle) && (lhs.tasks == rhs.tasks) && (lhs.taskListState == rhs.taskListState)
     }
     
     static var mock: AppState {
         .init(
             appLifecycle: .backgroundInactive,
             tasks: [
-                TaskObject.DTO(name: "Feed chickens"),
-                TaskObject.DTO(name: "Walk dog"),
-                TaskObject.DTO(name: "Write app"),
-                TaskObject.DTO(name: "Wash dishes")
-            ]
+                TaskDTO(name: "Feed chickens"),
+                TaskDTO(name: "Walk dog"),
+                TaskDTO(name: "Write app"),
+                TaskDTO(name: "Wash dishes")
+            ],
+            taskListState: TaskListState()
         )
+    }
+}
+
+// MARK: - SUBSTATES
+struct TaskListState: Equatable {
+    var selectedTask: TaskDTO?
+    
+    static var empty: TaskListState {
+        .init()
     }
 }
 
@@ -69,32 +81,33 @@ extension Reducer where ActionType == AppAction, StateType == AppState {
         Reducer<AppLifecycleAction, AppLifecycle>.lifecycle.lift(
             action: \AppAction.appLifecycle,
             state: \AppState.appLifecycle
-        ) <> Reducer<PersistentStoreAction, [TaskObject.DTO]>.persistentStore.lift(
+        ) <> Reducer<PersistentStoreAction, [TaskDTO]>.persistentStore.lift(
             action: \AppAction.persistentStore,
             state: \AppState.tasks
-        ) <> Reducer<ListAction, [TaskObject.DTO]>.list.lift(
-            action: \AppAction.list,
-            state: \AppState.tasks
-        ) <> Reducer<TaskAction, [TaskObject.DTO]>.task.lift(
+//        ) <> Reducer<ListAction, [TaskDTO]>.list.lift( // Removed as currently no ListAction Reducer
+//            action: \AppAction.list,
+//            state: \AppState.tasks
+        ) <> Reducer<TaskAction, [TaskDTO]>.task.lift(
             action: \AppAction.task,
             state: \AppState.tasks)
 }
 
-extension Reducer where ActionType == ListAction, StateType == [TaskObject.DTO] {
-    static let list = Reducer { action, state in
-        var state = state
-        switch action {
-        case .appear:
-            // TODO: - Implement additional Logger middleware for debugging
-            print("** VIEW onAppear CALLED **")
-        default:
-            break
-        }
-        return state
-    }
-}
 
-extension Reducer where ActionType == TaskAction, StateType == [TaskObject.DTO] {
+//extension Reducer where ActionType == ListAction, StateType == [TaskDTO] {
+//    static let list = Reducer { action, state in
+//        var state = state
+//        switch action {
+//        case .appear:
+//            // TODO: - Implement additional Logger middleware for debugging
+//            print("** VIEW onAppear CALLED **")
+//        default:
+//            break
+//        }
+//        return state
+//    }
+//}
+
+extension Reducer where ActionType == TaskAction, StateType == [TaskDTO] {
     static let task = Reducer { action, state in
         var state = state
         switch action {
@@ -110,6 +123,8 @@ extension Reducer where ActionType == TaskAction, StateType == [TaskObject.DTO] 
         return state
     }
 }
+
+#warning("How do we ensure the correct State property is being updated? Here we're just searching for any type that is a String and there could e many such properties. Furthermor, why isn't selectedStateId being updated?")
 
 // MARK: - MIDDLEWARE
 let appMiddleware =
@@ -132,12 +147,15 @@ let appMiddleware =
                 return .deleteTask(id)
             case let .list(.move(origin, offset)):
                 return .moveTask(origin, offset)
+            case let .list(.update(id, task)):
+                return .updateTask(id, task)
+            
             default:
                 return nil
             }
         },
         outputActionMap: AppAction.persistentStore,
-        stateMap: { _ in } /// i.e. Never
+        stateMap: { _ in } /// i.e. Never (for the moment at least...)
     )
 
 

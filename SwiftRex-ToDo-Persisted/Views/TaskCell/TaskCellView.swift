@@ -13,14 +13,17 @@ import SwiftRex
 
 
 struct TaskCellView: View {
-    typealias Task = TaskObject.DTO
+    typealias Task = TaskDTO
     @ObservedObject var viewModel: ObservableViewModel<Action, ViewState>
+    
     
     var body: some View {
         HStack {
             Text(viewModel.state.name)
+            Spacer()
         }
-    }
+        .contentShape(Rectangle())
+    } /// Spacer and .contentShape required to allow tapGesture on entire cell, not just the text frame
 }
 
 
@@ -41,8 +44,4 @@ struct TaskCellView_Previews: PreviewProvider {
     }
 }
 #endif
-//struct TaskCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-//    }
-//}
+

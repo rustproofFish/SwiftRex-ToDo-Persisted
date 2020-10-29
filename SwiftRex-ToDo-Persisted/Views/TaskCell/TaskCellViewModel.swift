@@ -13,16 +13,17 @@ import CombineRextensions
 extension TaskCellView {
     // MARK: - ACTIONS
     enum Action {
-        case update(String)
+        case update(String) /// user updated Task itle
     }
     
     // MARK: - STATE
     #warning("Ensure that State is not used within SwiftUI views - causes a namespace collision with @State")
     struct ViewState: Equatable {
+        let id: String
         let index: Int
         let name: String
         
-        static var empty = ViewState(index: 0, name: "")
+        static var empty = ViewState(id: "", index: 0, name: "")
     }
     
     // MARK: - VIEW MODEL
@@ -45,6 +46,7 @@ extension TaskCellView {
     static func transform(from state: Task?) -> TaskCellView.ViewState {
         guard let state = state else { return TaskCellView.ViewState.empty }
         return TaskCellView.ViewState(
+            id: state.id,
             index: state.index,
             name: state.name
         )

@@ -17,15 +17,17 @@ enum PersistentStoreAction {
     case connectToStore // TODO: Not impl yet - use for Realm Sync connection
     case subscribeToStoreChanges
     case cancelStoreSubscription
-    case add(TaskObject.DTO)
+    case add(TaskDTO)
     case deleteTask(String)
     case moveTask(IndexSet, Int)
-    case taskListModified([TaskObject.DTO])
+    case updateTask(String, TaskDTO)
+    case taskListModified([TaskDTO])
 }
 
 
 // MARK: - REDUCER
-extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskObject.DTO] {
+extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskDTO] {
+    #warning("Remove these side effects!")
     static let persistentStore = Reducer { action, state in
         var state = state
         switch action {
@@ -46,7 +48,7 @@ extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskO
 
 
 //MARK: - MIDDLEWARE
-class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.RealmObject == TaskObject {
+class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.PersistableType == TaskObject, S.DTO == TaskDTO {
     typealias InputActionType = PersistentStoreAction
     typealias OutputActionType = PersistentStoreAction
     typealias StateType = Void /// leave as is for now but might want to set some global flags relating to the status of the store
@@ -82,6 +84,8 @@ class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.Realm
             service.deleteObject(id: id)
         case let .moveTask(origin, offset):
             service.moveObject(from: origin, to: offset)
+        case let .updateTask(id, task):
+            service.updateObject(id, using: task)
         default:
             break
         }
@@ -94,9 +98,9 @@ class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.Realm
         // TODO: - IMPL
     }
     
-    private func subscribeToStore(publisher: AnyPublisher<[TaskObject.DTO], Never>) {
+    private func subscribeToStore(publisher: AnyPublisher<[TaskDTO], Never>) {
         /// accept a Publisher and subscribes to it
-        /// objects received ([TaskObject.DTO] in this example) encapsulated in an Action and dispatched to the ActionHandler. State then modified by a Reducer
+        /// objects received ([TaskDTO] in this example) encapsulated in an Action and dispatched to the ActionHandler. State then modified by a Reducer
         // TODO: - handle errors here?
         publisher
             .assertNoFailure() // TODO: refactor for better error handling e.g. return empty array and log error

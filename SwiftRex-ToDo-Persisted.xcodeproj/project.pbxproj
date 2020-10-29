@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE185226254773BC002BB8BC /* TaskDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE185225254773BC002BB8BC /* TaskDTO.swift */; };
 		CE8C8E512545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C8E502545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift */; };
 		CE8C8E552545C0FC003003C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8C8E542545C0FC003003C5 /* Assets.xcassets */; };
 		CE8C8E582545C0FC003003C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8C8E572545C0FC003003C5 /* Preview Assets.xcassets */; };
@@ -66,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE185225254773BC002BB8BC /* TaskDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDTO.swift; sourceTree = "<group>"; };
 		CE8C8E4D2545C0FB003003C5 /* SwiftRex-ToDo-Persisted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftRex-ToDo-Persisted.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8C8E502545C0FB003003C5 /* SwiftRex_ToDo_PersistedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRex_ToDo_PersistedApp.swift; sourceTree = "<group>"; };
 		CE8C8E542545C0FC003003C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				CEDF2DB12545D66100F76DCA /* TaskObject.swift */,
+				CE185225254773BC002BB8BC /* TaskDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE185226254773BC002BB8BC /* TaskDTO.swift in Sources */,
 				CEDF2DA72545D61B00F76DCA /* AppLifecycleMiddleware.swift in Sources */,
 				CEDF2DCB2545D7FB00F76DCA /* TaskList.swift in Sources */,
 				CEDF2D9C2545D5AD00F76DCA /* ViewProducers.swift in Sources */,
