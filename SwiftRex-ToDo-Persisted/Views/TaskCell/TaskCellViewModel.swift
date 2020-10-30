@@ -13,7 +13,8 @@ import CombineRextensions
 extension TaskCellView {
     // MARK: - ACTIONS
     enum Action {
-        case update(String) /// user updated Task itle
+        case toggle(String) /// user toggled status
+        case update(String) /// user updated Task title
     }
     
     // MARK: - STATE
@@ -22,8 +23,9 @@ extension TaskCellView {
         let id: String
         let index: Int
         let name: String
+        let completed: Bool
         
-        static var empty = ViewState(id: "", index: 0, name: "")
+        static var empty = ViewState(id: "", index: 0, name: "", completed: false)
     }
     
     // MARK: - VIEW MODEL
@@ -38,6 +40,7 @@ extension TaskCellView {
     static func transform(taskId: String) -> (TaskCellView.Action) -> TaskAction? {
         return { viewAction in
             switch viewAction {
+            case let .toggle(taskId): return .toggle(taskId)
             case let .update(title): return .update(taskId, title)
             }
         }
@@ -48,7 +51,8 @@ extension TaskCellView {
         return TaskCellView.ViewState(
             id: state.id,
             index: state.index,
-            name: state.name
+            name: state.name,
+            completed: state.completed
         )
     }
 }

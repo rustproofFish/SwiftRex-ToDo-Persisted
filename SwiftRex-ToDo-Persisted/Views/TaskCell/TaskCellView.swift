@@ -13,17 +13,26 @@ import SwiftRex
 
 
 struct TaskCellView: View {
-    typealias Task = TaskDTO
     @ObservedObject var viewModel: ObservableViewModel<Action, ViewState>
-    
     
     var body: some View {
         HStack {
-            Text(viewModel.state.name)
-            Spacer()
+            HStack {
+                Text(viewModel.state.name)
+                Spacer()
+            }
+            .contentShape(Rectangle())
+            /// Spacer and .contentShape required to allow tapGesture on entire cell, not just the text frame
+            
+            Group {
+                viewModel.state.completed ? Image(systemName: "circle.fill") : Image(systemName: "circle")
+            }
+                .onTapGesture { /// this tap gesture recogniser seems to happily override the recogniser in the parent view - a bit surprised by this...
+                    viewModel.dispatch(.toggle(viewModel.state.id))
+                }
         }
-        .contentShape(Rectangle())
-    } /// Spacer and .contentShape required to allow tapGesture on entire cell, not just the text frame
+
+    }
 }
 
 

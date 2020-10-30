@@ -72,13 +72,13 @@ final class RealmPersistenceService: PersistanceService {
     /// Not entirely comfortable about conversion to Array as we lose the lazy behaviour of Results...
     /// However Results cannot be direcly instantiated thus can't be used as the Element within a CurrentValueSubject
     /// Need to ensure that as much work (e.g. filtering, sorting) is done using Result prior to conversion to the DTO array
-    internal let subject = CurrentValueSubject<[TaskDTO], Never>([])
+    internal let subject = CurrentValueSubject<[Task], Never>([])
     internal var cancellables = Set<AnyCancellable>()
     
     // TODO: - Consider rewriting to allow error handling related to Realm errors.
     // According to developers, Realm failures only arise on first attempt to access Realm on a given thread so trapping is only
     // required here...
-    func all(matching predicate: NSPredicate = NSPredicate(value: true), in realm: Realm) -> AnyPublisher<[TaskDTO], Never> {
+    func all(matching predicate: NSPredicate = NSPredicate(value: true), in realm: Realm) -> AnyPublisher<[Task], Never> {
         realm.objects(TaskObject.self)
             .filter(predicate)
             .collectionPublisher
@@ -87,7 +87,7 @@ final class RealmPersistenceService: PersistanceService {
             .map { item in
                 item
                     .sorted(byKeyPath: "index") // TODO: Enable different sort descriptors
-                    .map { TaskDTO.from($0) }
+                    .map { Task.from($0) }
             }
             
             .receive(on: DispatchQueue.main)
@@ -99,7 +99,7 @@ final class RealmPersistenceService: PersistanceService {
     
     
     @discardableResult
-    func add(object properties: TaskDTO, in realm: Realm) -> AnyPublisher<TaskObject, Never> {
+    func add(object properties: Task, in realm: Realm) -> AnyPublisher<TaskObject, Never> {
         let index = realm.objects(TaskObject.self).count
         let task = TaskObject(index: index, name: properties.name)
         try! realm.write {
@@ -110,7 +110,7 @@ final class RealmPersistenceService: PersistanceService {
     }
     
     
-    func updateObject(_ id: String, using dto: TaskDTO, in realm: Realm) {
+    func updateObject(_ id: String, using dto: Task, in realm: Realm) {
         // TODO: Consider using rollback implementation in the event of errors
         // TODO: Return the amended Task or work on the assumption that no crash means success?
         guard let object = realm.object(ofType: TaskObject.self, forPrimaryKey: id) else {

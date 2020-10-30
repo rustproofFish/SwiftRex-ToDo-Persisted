@@ -29,7 +29,7 @@ struct ViewProducers {
     /// Will produce a TaskCellView with the appropriate Store projection for a given task identifier
     /// - Parameter store: the application store
     /// - Returns: a CheckmarkView view configured with the appropriate Stoore projection.
-    static func taskCell<S: StoreType>(store: S) -> ViewProducer<TaskDTO, TaskCellView> where S.StateType == AppState, S.ActionType == AppAction {
+    static func taskCell<S: StoreType>(store: S) -> ViewProducer<Task, TaskCellView> where S.StateType == AppState, S.ActionType == AppAction {
         ViewProducer { task in
             TaskCellView(
                 viewModel: TaskCellView.viewModel(store: store.projection(

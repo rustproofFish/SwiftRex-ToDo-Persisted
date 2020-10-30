@@ -12,14 +12,12 @@ import CombineRextensions
 import SwiftRex
 
 // MARK: - UI CODE
-struct TaskList: View {
-    typealias Task = TaskDTO
-    
+struct TaskList: View {    
     @ObservedObject var viewModel: ObservableViewModel<ViewAction, ViewState>
     @State private var isEditing = false
     @State private var selectedTask: String?
     @State private var taskName = ""
-    var rowProducer: ViewProducer<TaskDTO, TaskCellView>
+    var rowProducer: ViewProducer<Task, TaskCellView>
     
     var body: some View {
         NavigationView {
@@ -56,9 +54,9 @@ struct TaskList: View {
                                 if let editId = selectedTask
                                 {
                                     /// Passing a whole DTO rather than just the name so can add further editable values later 
-                                    viewModel.dispatch(.update(editId, TaskDTO(name: taskName)))
+                                    viewModel.dispatch(.update(editId, Task(name: taskName)))
                                 } else {
-                                    let dto = TaskDTO(name: taskName)
+                                    let dto = Task(name: taskName)
                                     viewModel.dispatch(.add(dto))
                                 }
                                 taskName.removeAll()

@@ -22,23 +22,21 @@ enum AppAction {
 }
 
 enum ListAction {
-    case add(TaskDTO)
+    case add(Task)
     case delete(String)
     case move(IndexSet, Int)
 //    case select(IndexSet)
-    case update(String, TaskDTO)
+    case update(String, Task)
 }
 
 enum TaskAction {
-    //    case toggle(String)
+    case toggle(String)
     case update(String, String)
 }
 
 
 // MARK: - STATE
 struct AppState: Equatable {
-    typealias Task = TaskDTO
-    
     var appLifecycle: AppLifecycle
     var tasks: [Task]
     var taskListState: TaskListState
@@ -55,10 +53,10 @@ struct AppState: Equatable {
         .init(
             appLifecycle: .backgroundInactive,
             tasks: [
-                TaskDTO(name: "Feed chickens"),
-                TaskDTO(name: "Walk dog"),
-                TaskDTO(name: "Write app"),
-                TaskDTO(name: "Wash dishes")
+                Task(name: "Feed chickens"),
+                Task(name: "Walk dog"),
+                Task(name: "Write app"),
+                Task(name: "Wash dishes")
             ],
             taskListState: TaskListState()
         )
@@ -67,7 +65,7 @@ struct AppState: Equatable {
 
 // MARK: - SUBSTATES
 struct TaskListState: Equatable {
-    var selectedTask: TaskDTO?
+    var selectedTask: Task?
     
     static var empty: TaskListState {
         .init()
@@ -81,13 +79,13 @@ extension Reducer where ActionType == AppAction, StateType == AppState {
         Reducer<AppLifecycleAction, AppLifecycle>.lifecycle.lift(
             action: \AppAction.appLifecycle,
             state: \AppState.appLifecycle
-        ) <> Reducer<PersistentStoreAction, [TaskDTO]>.persistentStore.lift(
+        ) <> Reducer<PersistentStoreAction, [Task]>.persistentStore.lift(
             action: \AppAction.persistentStore,
             state: \AppState.tasks
 //        ) <> Reducer<ListAction, [TaskDTO]>.list.lift( // Removed as currently no ListAction Reducer
 //            action: \AppAction.list,
 //            state: \AppState.tasks
-        ) <> Reducer<TaskAction, [TaskDTO]>.task.lift(
+        ) <> Reducer<TaskAction, [Task]>.task.lift(
             action: \AppAction.task,
             state: \AppState.tasks)
 }
@@ -107,14 +105,14 @@ extension Reducer where ActionType == AppAction, StateType == AppState {
 //    }
 //}
 
-extension Reducer where ActionType == TaskAction, StateType == [TaskDTO] {
+extension Reducer where ActionType == TaskAction, StateType == [Task] {
     static let task = Reducer { action, state in
         var state = state
         switch action {
-        //        case let .toggle(id):
-        //            if let index = state.firstIndex(where: { $0.id == id }) {
-        //                state[index].completed.toggle()
-        //            }
+        case let .toggle(id):
+            if let index = state.firstIndex(where: { $0.id == id }) {
+                state[index].completed.toggle()
+            }
         case let .update(id, name):
             if let index = state.firstIndex(where: { $0.id == id }) {
                 state[index].name = name

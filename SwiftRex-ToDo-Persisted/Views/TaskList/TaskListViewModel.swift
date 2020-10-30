@@ -16,11 +16,11 @@ extension TaskList {
     // MARK: - ACTIONS
     /// Needed to prefix 'View' to both Action and State otherwise collission with SwiftUI's @State...
     enum ViewAction {
-        case add(TaskDTO)
+        case add(Task)
         case delete(String)
         case move(IndexSet, Int)
 //        case select(IndexSet)
-        case update(String, TaskDTO)
+        case update(String, Task)
     }
     
     // MARK: - STATE
@@ -51,7 +51,7 @@ extension TaskList {
         }
     }
     
-    private static func transform(from state: [TaskDTO]) -> TaskList.ViewState {
+    private static func transform(from state: [Task]) -> TaskList.ViewState {
         TaskList.ViewState(
             title: "Tasks",
             tasks: state,

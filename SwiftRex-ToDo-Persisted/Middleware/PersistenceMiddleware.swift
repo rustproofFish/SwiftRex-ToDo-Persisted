@@ -11,22 +11,21 @@ import Combine
 import SwiftRex
 
 
-#warning("Implement external logging framework as Middleware")
 // MARK: - ACTION
 enum PersistentStoreAction {
     case connectToStore // TODO: Not impl yet - use for Realm Sync connection
     case subscribeToStoreChanges
     case cancelStoreSubscription
-    case add(TaskDTO)
+    case add(Task)
     case deleteTask(String)
     case moveTask(IndexSet, Int)
-    case updateTask(String, TaskDTO)
-    case taskListModified([TaskDTO])
+    case updateTask(String, Task)
+    case taskListModified([Task])
 }
 
 
 // MARK: - REDUCER
-extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskDTO] {
+extension Reducer where ActionType == PersistentStoreAction, StateType == [Task] {
     static let persistentStore = Reducer { action, state in
         var state = state
         switch action {
@@ -43,7 +42,7 @@ extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskD
 
 
 //MARK: - MIDDLEWARE
-class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.PersistableType == TaskObject, S.DTO == TaskDTO {
+class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.PersistableType == TaskObject, S.DTO == Task {
     typealias InputActionType = PersistentStoreAction
     typealias OutputActionType = PersistentStoreAction
     typealias StateType = Void /// leave as is for now but might want to set some global flags relating to the status of the store
@@ -93,7 +92,7 @@ class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.Persi
         // TODO: - IMPL
     }
     
-    private func subscribeToStore(publisher: AnyPublisher<[TaskDTO], Never>) {
+    private func subscribeToStore(publisher: AnyPublisher<[Task], Never>) {
         /// accept a Publisher and subscribes to it
         /// objects received ([TaskDTO] in this example) encapsulated in an Action and dispatched to the ActionHandler. State then modified by a Reducer
         // TODO: - handle errors here?
