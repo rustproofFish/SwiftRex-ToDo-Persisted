@@ -16,7 +16,8 @@ struct TaskList: View {
     typealias Task = TaskDTO
     
     @ObservedObject var viewModel: ObservableViewModel<ViewAction, ViewState>
-    @State private var editMode = EditMode.inactive
+    @State private var isEditing = false
+    @State private var selectedTask: String?
     @State private var taskName = ""
     var rowProducer: ViewProducer<TaskDTO, TaskCellView>
     
@@ -27,19 +28,21 @@ struct TaskList: View {
                     ForEach(viewModel.state.tasks) { task in
                         rowProducer.view(task)
                             .onTapGesture(count: 1) {
-                                viewModel.state.selected = task.id
+                                selectedTask = task.id
                                 taskName = task.name
                             }
                     }
                     .onDelete(perform: {
                         viewModel.dispatch(.delete(viewModel.state.tasks[$0.first!].id))
+                        selectedTask = nil
+                        taskName.removeAll()
                     })
                     .onMove(perform: { indices, newOffset in
                         viewModel.dispatch(.move(indices, newOffset))
                     })
                 }
                 
-                ConditionalView(editMode == .inactive) { _ in
+                ConditionalView(on: !isEditing) { _ in
                     VStack {
                         Spacer()
                         
@@ -50,7 +53,7 @@ struct TaskList: View {
                             Spacer()
                             
                             Button(action: {
-                                if let editId = viewModel.state.selected
+                                if let editId = selectedTask
                                 {
                                     /// Passing a whole DTO rather than just the name so can add further editable values later 
                                     viewModel.dispatch(.update(editId, TaskDTO(name: taskName)))
@@ -69,9 +72,19 @@ struct TaskList: View {
                 }
                 
             }
-            .navigationBarItems( trailing: EditButton() )
+            /// Not using EditButton() here to allow conditional mutation of view state
+            .navigationBarItems(
+                trailing:
+                    Button("Edit") {
+                        isEditing.toggle()
+                        if isEditing {
+                            /// Ensuring that a task can't be edited after it has been deleted when edit mode is active
+                            selectedTask = nil
+                            taskName = ""
+                        }
+                    })
             .navigationBarTitle(viewModel.state.title)
-            .environment(\.editMode, $editMode)
+            .environment(\.editMode, .constant(isEditing ? EditMode.active : EditMode.inactive)).animation(.spring())
         }
     }
 }

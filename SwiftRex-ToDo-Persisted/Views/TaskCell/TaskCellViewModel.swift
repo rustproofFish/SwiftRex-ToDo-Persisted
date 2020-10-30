@@ -17,7 +17,7 @@ extension TaskCellView {
     }
     
     // MARK: - STATE
-    #warning("Ensure that State is not used within SwiftUI views - causes a namespace collision with @State")
+    // WARN: - SwiftRex demo code uses State and Action structs but this causes a collision with SwiftUI's @State property wrapper.
     struct ViewState: Equatable {
         let id: String
         let index: Int

@@ -25,7 +25,7 @@ enum ListAction {
     case add(TaskDTO)
     case delete(String)
     case move(IndexSet, Int)
-    case select(IndexSet)
+//    case select(IndexSet)
     case update(String, TaskDTO)
 }
 
@@ -124,7 +124,6 @@ extension Reducer where ActionType == TaskAction, StateType == [TaskDTO] {
     }
 }
 
-#warning("How do we ensure the correct State property is being updated? Here we're just searching for any type that is a String and there could e many such properties. Furthermor, why isn't selectedStateId being updated?")
 
 // MARK: - MIDDLEWARE
 let appMiddleware =

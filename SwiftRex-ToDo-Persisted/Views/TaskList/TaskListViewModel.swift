@@ -19,7 +19,7 @@ extension TaskList {
         case add(TaskDTO)
         case delete(String)
         case move(IndexSet, Int)
-        case select(IndexSet)
+//        case select(IndexSet)
         case update(String, TaskDTO)
     }
     
@@ -46,7 +46,7 @@ extension TaskList {
         case let .add(task): return .add(task)
         case let .delete(id): return .delete(id)
         case let .move(index, offset): return .move(index, offset)
-        case let .select(index): return .select(index)
+//        case let .select(index): return .select(index)
         case let .update(id, task): return .update(id, task)
         }
     }

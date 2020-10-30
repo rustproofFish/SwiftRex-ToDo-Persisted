@@ -27,19 +27,14 @@ enum PersistentStoreAction {
 
 // MARK: - REDUCER
 extension Reducer where ActionType == PersistentStoreAction, StateType == [TaskDTO] {
-    #warning("Remove these side effects!")
     static let persistentStore = Reducer { action, state in
         var state = state
         switch action {
-        case .connectToStore:
-            NSLog("Connecting to store")
-        case .subscribeToStoreChanges:
-            NSLog("Subscribing for Realm changes")
-        case .cancelStoreSubscription:
-            NSLog("Connecting to store")
-        case .taskListModified(let value): // TODO: - Not sure if this is most efficient or should use ChangeSet?
+        case .taskListModified(let value):
+            // TODO: - Not sure if this is most efficient or should use ChangeSet?
             state = value
         default:
+            /// other PersistanceMiddleware Actions do not mutate state directly
             break
         }
         return state
@@ -65,15 +60,15 @@ class PersistentStoreMiddleware<S: PersistanceService>: Middleware where S.Persi
     
     
     func receiveContext(getState: @escaping GetState<Void>, output: AnyActionHandler<OutputActionType>) {
-        // observe system events here if necessary
-        // setup local properties
+        /// observe system events here if necessary - remember State cannot be mutated outside a Reducer
+        /// setup local properties if needed
         self.output = output
     }
     
     func handle(action: PersistentStoreAction, from dispatcher: ActionSource, afterReducer: inout AfterReducer) {
         switch action {
         case .connectToStore:
-            NSLog("Connect to store - NOT IMPLEMENTED")
+            NSLog("Connect to store - NOT CURRENTLY IMPLEMENTED")
         case .subscribeToStoreChanges:
             subscribeToStore(publisher: service.all())
         case .cancelStoreSubscription:

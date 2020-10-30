@@ -26,7 +26,7 @@ struct ConditionalView<Content: View>: View {
     private let condition: Bool?
     private let contentProvider: (Bool) -> Content
     
-    init(_ condition: Bool, @ViewBuilder content: @escaping (Bool) -> Content) {
+    init(on condition: Bool, @ViewBuilder content: @escaping (Bool) -> Content) {
         self.condition = condition ? condition : nil
         self.contentProvider = content
     }
