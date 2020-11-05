@@ -23,21 +23,8 @@ struct TaskList: View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(viewModel.state.tasks) { task in
-                        rowProducer.view(task)
-                            .onTapGesture(count: 1) {
-                                selectedTask = task.id
-                                taskName = task.name
-                            }
-                    }
-                    .onDelete(perform: {
-                        viewModel.dispatch(.delete(viewModel.state.tasks[$0.first!].id))
-                        selectedTask = nil
-                        taskName.removeAll()
-                    })
-                    .onMove(perform: { indices, newOffset in
-                        viewModel.dispatch(.move(indices, newOffset))
-                    })
+                    sectionedTasksMatching(predicate: { $0.completed == false }, header: "OUSTANDING")
+                    sectionedTasksMatching(predicate: { $0.completed == true }, header: "COMPLETED")
                 }
                 
                 ConditionalView(on: !isEditing) { _ in
@@ -85,9 +72,27 @@ struct TaskList: View {
             .environment(\.editMode, .constant(isEditing ? EditMode.active : EditMode.inactive)).animation(.spring())
         }
     }
+    
+    private func sectionedTasksMatching(predicate: (Task) -> Bool, header: String) -> some View {
+        Section(header: Text(header)) {
+            ForEach(viewModel.state.tasks.filter(predicate)) { task in
+                rowProducer.view(task)
+                    .onTapGesture(count: 1) {
+                        selectedTask = task.id
+                        taskName = task.name
+                    }
+            }
+            .onDelete(perform: {
+                viewModel.dispatch(.delete(viewModel.state.tasks[$0.first!].id))
+                selectedTask = nil
+                taskName.removeAll()
+            })
+            .onMove(perform: { indices, newOffset in
+                viewModel.dispatch(.move(indices, newOffset))
+            })
+        }
+    }
 }
-
-
 
 
 #if DEBUG

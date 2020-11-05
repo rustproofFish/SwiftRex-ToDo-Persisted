@@ -36,7 +36,7 @@ protocol PersistanceService {
 // MARK: - EXTENSION
 extension PersistanceService {
     // Using extension to allow default parameters for methods
-    func all(matching predicate: NSPredicate = NSPredicate(value: true), in realm: Realm = try! Realm()) -> AnyPublisher<[DTO], Never> {
+        func all(matching predicate: NSPredicate = NSPredicate(value: true), in realm: Realm = try! Realm()) -> AnyPublisher<[DTO], Never> {
         all(matching: predicate, in: realm)
     }
     
