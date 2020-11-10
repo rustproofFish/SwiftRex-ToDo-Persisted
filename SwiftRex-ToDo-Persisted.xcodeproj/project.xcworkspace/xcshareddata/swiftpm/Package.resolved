@@ -1,0 +1,70 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CombineRextensions",
+        "repositoryURL": "https://github.com/SwiftRex/CombineRextensions",
+        "state": {
+          "branch": "master",
+          "revision": "b58f090167eb0c44944405978cd4ea2d400a0af0",
+          "version": null
+        }
+      },
+      {
+        "package": "LoggerMiddleware",
+        "repositoryURL": "https://github.com/SwiftRex/LoggerMiddleware",
+        "state": {
+          "branch": null,
+          "revision": "6fdad87c18e7feec06272f53cfb856c1b44f04bb",
+          "version": "0.1.2"
+        }
+      },
+      {
+        "package": "ReactiveSwift",
+        "repositoryURL": "https://github.com/ReactiveCocoa/ReactiveSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "2260221e19eb024382a1b20cdd2c8adc4f48f8b8",
+          "version": "6.4.0"
+        }
+      },
+      {
+        "package": "Realm",
+        "repositoryURL": "https://github.com/realm/realm-cocoa.git",
+        "state": {
+          "branch": null,
+          "revision": "000b257aa576bbe2c8ca18e6e84bd6cb56e5cf5b",
+          "version": "10.1.0"
+        }
+      },
+      {
+        "package": "RealmCore",
+        "repositoryURL": "https://github.com/realm/realm-core",
+        "state": {
+          "branch": null,
+          "revision": "c29f4347aff5d1f61f7672c05ebf1bfbc1d44d25",
+          "version": "10.0.0"
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "002d325b0bdee94e7882e1114af5ff4fe1e96afa",
+          "version": "5.1.1"
+        }
+      },
+      {
+        "package": "SwiftRex",
+        "repositoryURL": "https://github.com/SwiftRex/SwiftRex",
+        "state": {
+          "branch": null,
+          "revision": "777643fc1599a23dfc2e89f4ee0d474c2f8b7826",
+          "version": "0.7.8"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
